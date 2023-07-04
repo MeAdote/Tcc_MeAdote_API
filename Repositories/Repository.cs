@@ -2,5 +2,6 @@
 {
     public class Repository
     {
+        public int MyProperty { get; set; }
     }
 }
