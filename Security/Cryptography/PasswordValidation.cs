@@ -5,7 +5,7 @@ namespace Tcc_MeAdote_API.Security.Cryptography
 {
     public class PasswordValidation
     {
-        public bool Validation(UserLogin userLogin, LoginUserDto model)
+        public bool Validation(UserLogin userLogin, UserLoginDto model)
         {
             PasswordCrypthografy pC = new PasswordCrypthografy();
             var salt = Convert.FromBase64String(userLogin.Salt);
