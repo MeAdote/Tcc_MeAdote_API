@@ -36,11 +36,7 @@ namespace Tcc_MeAdote_API.Controllers
                 if (_userLoginRepository.GetEmail(model.UserLogin.Email.ToLower()) != null) return Conflict("Email já Cadastrado");
 
                 User user = _mapper.Map<User>(model.User);
-                _userRepository.Add(user);
-
                 UserAdress userAdress = _mapper.Map<UserAdress>(model.UserAdress);
-                userAdress.UserId = user.Id;
-                _userAdressRepository.Add(userAdress);
 
                 PasswordCrypthografy pc = new PasswordCrypthografy();
                 byte[] salt = pc.GenerateSalt();
@@ -49,8 +45,9 @@ namespace Tcc_MeAdote_API.Controllers
                 userLogin.Salt = Convert.ToBase64String(salt);
                 userLogin.Password = pc.HashPassword(userLogin.Password, salt);
                 userLogin.Email = userLogin.Email.ToLower();
-                userLogin.UserId = user.Id;
-                _userLoginRepository.Add(userLogin);
+
+
+                _userRepository.Add(user, userAdress, userLogin);
 
                 return Ok(new { Message = "Usuário Criado com sucesso" });
             }

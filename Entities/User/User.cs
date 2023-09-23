@@ -10,17 +10,16 @@ namespace Tcc_MeAdote_API.Entities.User
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public int Age { get; set; }
         public string Telephone { get; set; }
         public string ProfilePicture { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("USERS");
+            builder.ToTable("users");
             builder.HasKey(x => x.Id);
 
             builder
@@ -32,8 +31,8 @@ namespace Tcc_MeAdote_API.Entities.User
                 .HasColumnName("last_name")
                 .IsRequired();
 
-            builder.Property(x => x.BirthDate)
-                .HasColumnName("birth_date")
+            builder.Property(x => x.Age)
+                .HasColumnName("age")
                 .IsRequired();
 
             builder
@@ -43,9 +42,6 @@ namespace Tcc_MeAdote_API.Entities.User
             builder
                 .Property(x => x.ProfilePicture)
                 .HasColumnName("profile_picture");
-            builder
-                .Property(x => x.CreatedAt)
-                .HasColumnName("created_at");
         }
     }
 }

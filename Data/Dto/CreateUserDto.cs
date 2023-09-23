@@ -18,10 +18,9 @@ namespace Tcc_MeAdote_API.Data.Dto
         public string FirstName { get; set; }
         [Required(ErrorMessage = "First Name is required")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "BirthDate is required")]
-        public DateTime BirthDate { get; set; }
+        [Required(ErrorMessage = "Age is Required")]
+        public int Age { get; set; }
         [Required(ErrorMessage = "Telephone is required")]
-        [Phone(ErrorMessage = "Invalid Telephone Number")]
         public string Telephone { get; set; }
         public string ProfilePicture { get; set; }
     }
@@ -47,9 +46,6 @@ namespace Tcc_MeAdote_API.Data.Dto
         [Required(ErrorMessage = "State is Required")]
         public string State { get; set; }
         [Required(ErrorMessage = "PostalCode is Required")]
-        [RegularExpression(@"^\d{5}-\d{3}$", ErrorMessage = "PostalCode format 00000-000")]
         public string PostalCode { get; set; }
-        [Required(ErrorMessage = "Country is Required")]
-        public string Country { get; set; }
     }
 }

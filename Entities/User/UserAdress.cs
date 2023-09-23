@@ -8,8 +8,8 @@ namespace Tcc_MeAdote_API.Entities.User
         public int Id { get; set; }
         public string StreetName { get; set; }             
         public string City { get; set; }
+        public string State { get; set; }
         public string PostalCode { get; set; }
-        public string Country { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
 
@@ -31,12 +31,12 @@ namespace Tcc_MeAdote_API.Entities.User
                 .HasColumnName("city")
                 .IsRequired();
 
+            builder.Property(x => x.State)
+            .HasColumnName("state")
+            .IsRequired();
+            
             builder.Property(x => x.PostalCode)
                 .HasColumnName("postal_code")
-                .IsRequired();
-
-            builder.Property(x => x.Country)
-                .HasColumnName("country")
                 .IsRequired();
 
             builder

@@ -11,11 +11,29 @@ namespace Tcc_MeAdote_API.Repositories.UserRepository
             _context = context;
         }
 
-        public User Add(User model)
+        public bool Add(User modelUser, UserAdress modelAdress, UserLogin modelLogin)
         {
-            _context.User.Add(model);
-            _context.SaveChanges();
-            return model;
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.User.Add(modelUser);
+                _context.SaveChanges();
+                modelAdress.UserId = modelUser.Id;
+                modelLogin.UserId = modelUser.Id;
+                _context.UserAdress.Add(modelAdress);
+                _context.UserLogin.Add(modelLogin);
+
+                _context.SaveChanges();
+
+                transaction.Commit();
+            }
+            catch (System.Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
+
+            return true;
         }
 
         public User Get(int id) 

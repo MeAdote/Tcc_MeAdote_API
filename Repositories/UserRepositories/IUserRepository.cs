@@ -4,7 +4,7 @@ namespace Tcc_MeAdote_API.Repositories.UserRepository
 {
     public interface IUserRepository
     {
-        public User Add(User model);
+        public bool Add(User model, UserAdress modelAdress, UserLogin modelLogin);
         public User Get(int id);
     }
 }

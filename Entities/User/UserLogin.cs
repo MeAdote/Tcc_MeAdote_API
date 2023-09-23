@@ -22,7 +22,7 @@ namespace Tcc_MeAdote_API.Entities.User
     {
         public void Configure(EntityTypeBuilder<UserLogin> builder)
         {
-            builder.ToTable("USER_LOGIN");
+            builder.ToTable("user_login");
             builder.HasKey(x => x.Id);
 
             builder
