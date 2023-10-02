@@ -5,6 +5,7 @@ using System.Configuration;
 using Tcc_MeAdote_API.Repositories.UserRepository;
 using Tcc_MeAdote_API.Repositories.UserLoginRepositories;
 using Tcc_MeAdote_API.Repositories.UserAdressRepositories;
+using Tcc_MeAdote_API.Repositories.PetRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +18,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddDbContext<Context>(opt => opt.UseMySQL(builder.Configuration.GetConnectionString("ConnectionDbMeu")));
+builder.Services.AddDbContext<Context>(opt => opt.UseMySQL(builder.Configuration.GetConnectionString("ConnectionDb")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
 builder.Services.AddScoped<IUserAdressRepository, UserAdressRepository>();
+builder.Services.AddScoped<IPetRepository, PetRepository>();
+
+
 
 var app = builder.Build();
 
