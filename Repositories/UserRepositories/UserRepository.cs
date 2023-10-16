@@ -36,7 +36,7 @@ namespace Tcc_MeAdote_API.Repositories.UserRepository
             return true;
         }
 
-        public User Get(int id) 
+        public User GetById(int id) 
         {
             return _context.User.FirstOrDefault(u => u.Id == id);
         }

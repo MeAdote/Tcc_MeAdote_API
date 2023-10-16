@@ -56,5 +56,15 @@ namespace Tcc_MeAdote_API.Controllers
                 return BadRequest(new { Message = "Erro ao criar o usuário" });
             }
         }  
+
+        [HttpPost("authenticate")]
+        public IActionResult Authentication(AuthUserDto model)
+        {
+            
+
+
+            return Ok();
+
+        }
     }
 }
