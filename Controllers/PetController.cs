@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tcc_MeAdote_API.Authorization;
 using Tcc_MeAdote_API.Repositories.PetRepository;
 
 namespace Tcc_MeAdote_API.Controllers
@@ -13,7 +14,7 @@ namespace Tcc_MeAdote_API.Controllers
         {
             _petRepository = petRepository;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetPets()
         {

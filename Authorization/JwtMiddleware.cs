@@ -11,26 +11,25 @@ public class JwtMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly AppSettings _appSettings;
-    private readonly IUserRepository _userRepository;
 
     public JwtMiddleware(RequestDelegate next, 
-    IOptions<AppSettings> appSettings,
-    IUserRepository userRepository)
+    IOptions<AppSettings> appSettings)
     {
         _next = next;
         _appSettings = appSettings.Value;
-        _userRepository = userRepository;
     }
 
-    public async Task Invoke(HttpContext context)
+    public async Task Invoke(HttpContext context, IUserRepository userRepository)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
         if(token != null)
-        AttachUserContext(context, token);
+        AttachUserContext(context, userRepository ,token);
+
+        await _next(context);
     }
 
-    private void AttachUserContext(HttpContext context, string token)
+    private void AttachUserContext(HttpContext context, IUserRepository userRepository,string token)
     {
         try
         {
@@ -49,7 +48,7 @@ public class JwtMiddleware
             var jwtToken = (JwtSecurityToken)validateToken;
             var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-            context.Items["User"] = _userRepository.GetById(userId);
+            context.Items["User"] = userRepository.GetById(userId);
         }
         catch (System.Exception)
         {}

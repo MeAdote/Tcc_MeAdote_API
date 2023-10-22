@@ -40,5 +40,10 @@ namespace Tcc_MeAdote_API.Repositories.UserRepository
         {
             return _context.User.FirstOrDefault(u => u.Id == id);
         }
+
+        public User GetUser(UserLogin model)
+        {
+            return _context.User.FirstOrDefault(u => u.Id == model.UserId);
+        }
     }
 }

@@ -6,6 +6,7 @@ using Tcc_MeAdote_API.Repositories.UserAdressRepositories;
 using Tcc_MeAdote_API.Repositories.UserLoginRepositories;
 using Tcc_MeAdote_API.Repositories.UserRepository;
 using Tcc_MeAdote_API.Security.Cryptography;
+using Tcc_MeAdote_API.Service.UserService;
 
 namespace Tcc_MeAdote_API.Controllers
 {
@@ -16,16 +17,20 @@ namespace Tcc_MeAdote_API.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IUserLoginRepository _userLoginRepository;
         private readonly IUserAdressRepository _userAdressRepository;
+        private readonly IUserService _userService;
+
         private readonly IMapper _mapper;
         public UserController(IUserRepository userRepository,
             IUserLoginRepository userLoginRepository,
             IUserAdressRepository userAdressRepository,
+            IUserService userService,
             IMapper mapper)
         {
             _userRepository = userRepository;
             _userLoginRepository = userLoginRepository;
             _userAdressRepository = userAdressRepository;
             _mapper = mapper;
+            _userService = userService;
         }
         
         [HttpPost("cadaster")]
@@ -58,13 +63,21 @@ namespace Tcc_MeAdote_API.Controllers
         }  
 
         [HttpPost("authenticate")]
-        public IActionResult Authentication(AuthUserDto model)
+        public IActionResult Authentication(UserLoginDto model)
         {
+            var token  = _userService.Authenticate(model);
             
+            return Ok(token);
+
+        }
 
 
-            return Ok();
+        [HttpGet("UsersLogin")]
+        public IActionResult GetUsers()
+        {
+            var list = _userLoginRepository.GetUsers();
 
+            return Ok(list);
         }
     }
 }

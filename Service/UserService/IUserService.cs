@@ -2,7 +2,7 @@ namespace Tcc_MeAdote_API.Service.UserService;
 
 using Tcc_MeAdote_API.Data.Dto;
 
-interface IUserService
+public interface IUserService
 {
-    AuthUserToken Authenticate(AuthUserDto model);
+    AuthUserToken Authenticate(UserLoginDto model);
 }

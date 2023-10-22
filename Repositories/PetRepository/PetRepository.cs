@@ -15,7 +15,5 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
         {
             return _context.Pet;
         }
-
-
     }
 }
