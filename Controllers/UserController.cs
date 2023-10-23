@@ -72,12 +72,12 @@ namespace Tcc_MeAdote_API.Controllers
         }
 
 
-        [HttpGet("UsersLogin")]
-        public IActionResult GetUsers()
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
         {
-            var list = _userLoginRepository.GetUsers();
+            var user = _userRepository.GetById(id);
 
-            return Ok(list);
+            return Ok(user);
         }
     }
 }

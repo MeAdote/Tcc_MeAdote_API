@@ -11,7 +11,27 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
         {
             _context = context;
         }
-       public IEnumerable<Pet> GetPets()
+
+        public async Task<Pet> Add(Pet model)
+        {
+            
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Pet.Add(model);
+                
+
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
+            return model;
+        }
+
+        public IEnumerable<Pet> GetPets()
         {
             return _context.Pet;
         }
