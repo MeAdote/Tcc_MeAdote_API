@@ -12,22 +12,34 @@ namespace Tcc_MeAdote_API.Controllers
     public class PetController : ControllerBase
     {
         private readonly IPetRepository _petRepository;
+        private readonly IPetService _petService;
         private readonly IMapper _mapper;
 
         public PetController(IPetRepository petRepository,
-                IMapper mapper)
+                IMapper mapper,
+                IPetService petService)
         {
             _petRepository = petRepository;
             _mapper = mapper;
+            _petService = petService;
         }
         //[Authorize]
-        [HttpGet("pets")]
+        [HttpGet]
         public IActionResult GetPets()
         {
             var pets = _petRepository.GetPets();
             IEnumerable<ReadPetDto> petDto = _mapper.Map<IEnumerable<ReadPetDto>>(pets); 
             return Ok(petDto);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPetId(int id)
+        {
+            var pet = _petService.GetPetById(id);
+            return Ok(pet);
+        }
+
+
 
         [HttpPost("cadaster")]
         public IActionResult CadasterPet([FromBody] CreatePetDto model)
@@ -39,7 +51,6 @@ namespace Tcc_MeAdote_API.Controllers
             }
             catch (Exception e)
             {
-                
                 BadRequest("Erro ao cadastrar pet");
             }
 

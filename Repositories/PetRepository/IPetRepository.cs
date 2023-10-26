@@ -1,7 +1,6 @@
 ﻿
 
 using Tcc_MeAdote_API.Entities.Pets;
-using Tcc_MeAdote_API.Entities.User;
 
 namespace Tcc_MeAdote_API.Repositories.PetRepository
 {
@@ -9,5 +8,6 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
     {
         public Task<Pet> Add(Pet model);
         public IEnumerable<Pet> GetPets();
+        public Pet GetPetById(int id);
     }
 }

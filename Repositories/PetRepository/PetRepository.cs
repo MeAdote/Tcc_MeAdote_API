@@ -31,6 +31,13 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
             return model;
         }
 
+        public Pet GetPetById(int id)
+        {
+            var pet = _context.Pet.FirstOrDefault(p => p.Id == id);
+
+            return pet;
+        }
+
         public IEnumerable<Pet> GetPets()
         {
             return _context.Pet;
