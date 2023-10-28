@@ -47,14 +47,14 @@ namespace Tcc_MeAdote_API.Controllers
             try
             {    
                 Pet pet = _mapper.Map<Pet>(model);
-                _petRepository.Add(pet);   
+                _petRepository.Add(pet);
+
+                return Ok("Pet cadastrado com sucesso!");
             }
             catch (Exception e)
             {
-                BadRequest("Erro ao cadastrar pet");
+                return BadRequest("Erro ao cadastrar pet");
             }
-
-            return Ok("Pet cadastrado com sucesso!");
         }
     }
 }

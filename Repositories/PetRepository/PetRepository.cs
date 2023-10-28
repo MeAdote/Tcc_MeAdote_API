@@ -12,23 +12,20 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
             _context = context;
         }
 
-        public async Task<Pet> Add(Pet model)
+        public Pet Add(Pet model)
         {
-            
-            using var transaction = _context.Database.BeginTransaction();
             try
             {
                 _context.Pet.Add(model);
-                
+                _context.SaveChanges();
 
-                await _context.SaveChangesAsync();
+                return model;
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-                transaction.Rollback();
-                throw;
+
+                throw new Exception($"Error: {e.Message}, {e.InnerException}");
             }
-            return model;
         }
 
         public Pet GetPetById(int id)

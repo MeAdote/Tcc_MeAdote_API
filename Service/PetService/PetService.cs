@@ -25,6 +25,7 @@ public class PetService : IPetService
             Race = pet.Race,
             Location = pet.Race,
             Description = pet.Description,
+            PetPicture = pet.PetPicture,
             FirstName = user.FirstName,
             LastName = user.LastName
         };

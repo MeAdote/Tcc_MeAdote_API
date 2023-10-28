@@ -11,7 +11,13 @@ public class CreatePetDto
     public string Location { get; set; }
     [Required(ErrorMessage = "Description is Required")]
     public string Description { get; set; }
-    public int UserId { get; set; }
+    [Required(ErrorMessage = "Age is Required")]
+    public short Age { get; set; }
+    [Required(ErrorMessage ="Pet Picture is required")]
+    public string PetPicture { get; set; }
     [Required(ErrorMessage = "Pet Type is required")]
-    public int PetType { get; set; }
+    public int PetTypeId { get; set; }
+    public int UserId { get; set; }
+    
+    
 }

@@ -11,6 +11,8 @@ namespace Tcc_MeAdote_API.Entities.Pets
         public string Race { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
+        public short Age { get; set; }
+        public string PetPicture { get; set; }
         public PetType PetType { get; set; }
         public int PetTypeId { get; set; }
         public User.User User  { get; set; }
@@ -27,6 +29,8 @@ namespace Tcc_MeAdote_API.Entities.Pets
             builder.Property(x => x.Name)
                 .HasColumnName("name")
                 .IsRequired();
+            builder.Property(x => x.Age)
+                .HasColumnName("age");
 
             builder.Property(x => x.Race)
                 .HasColumnName("race")
@@ -35,6 +39,7 @@ namespace Tcc_MeAdote_API.Entities.Pets
             builder.Property(x => x.Location)
                 .HasColumnName("location")
                 .IsRequired();
+            
 
             builder.Property(x => x.Description)
                 .HasColumnName("description")
@@ -57,6 +62,10 @@ namespace Tcc_MeAdote_API.Entities.Pets
             builder.HasOne(x => x.User)
                 .WithMany()
                 .HasForeignKey(x => x.UserId)
+                .IsRequired();
+
+            builder.Property(x => x.PetPicture)
+                .HasColumnName("picture_pet")
                 .IsRequired();
 
         }

@@ -5,6 +5,8 @@ public class ReadPetDto
     public string Race { get; set; }
     public string Location { get; set; }
     public string Description { get; set; }
+    public string Age { get; set; }
+    public string PetPicture { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }
