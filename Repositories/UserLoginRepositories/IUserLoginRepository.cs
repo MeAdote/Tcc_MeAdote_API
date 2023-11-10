@@ -8,7 +8,7 @@ namespace Tcc_MeAdote_API.Repositories.UserLoginRepositories
         public UserLogin Add(UserLogin model);
         public UserLogin GetEmail(string email);
         public UserLogin GetUserLogin(UserLoginDto model);
-
+        public UserLogin GetById(int id);
         public IEnumerable<UserLogin> GetUsers();
 
     }

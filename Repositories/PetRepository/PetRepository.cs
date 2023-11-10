@@ -35,6 +35,13 @@ namespace Tcc_MeAdote_API.Repositories.PetRepository
             return pet;
         }
 
+        public List<Pet> GetPetByIdUser(int id)
+        {
+            var pets = _context.Pet.Where(u => u.UserId == id).ToList();
+
+            return pets;
+        }
+
         public IEnumerable<Pet> GetPets()
         {
             return _context.Pet;

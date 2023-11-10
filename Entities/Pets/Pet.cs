@@ -11,7 +11,7 @@ namespace Tcc_MeAdote_API.Entities.Pets
         public string Race { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
-        public short Age { get; set; }
+        public string Age { get; set; }
         public string PetPicture { get; set; }
         public PetType PetType { get; set; }
         public int PetTypeId { get; set; }

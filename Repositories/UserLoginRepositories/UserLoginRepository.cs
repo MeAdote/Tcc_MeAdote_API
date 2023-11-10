@@ -21,6 +21,11 @@ namespace Tcc_MeAdote_API.Repositories.UserLoginRepositories
             return model;
         }
 
+        public UserLogin GetById(int id)
+        {
+            return _context.UserLogin.FirstOrDefault(u => u.Id == id);
+        }
+
         public UserLogin GetEmail(string email)
         {
             return _context.UserLogin.FirstOrDefault(u => u.Email == email);

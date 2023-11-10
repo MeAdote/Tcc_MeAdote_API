@@ -21,13 +21,16 @@ public class PetService : IPetService
         var petDto = new ReadPetDto 
         {
             Id = pet.Id,
+            IdUser = user.Id,
             Name = pet.Name,
             Race = pet.Race,
-            Location = pet.Race,
+            Location = pet.Location,
+            Age = pet.Age,
             Description = pet.Description,
             PetPicture = pet.PetPicture,
             FirstName = user.FirstName,
-            LastName = user.LastName
+            LastName = user.LastName,
+            ProfilePicture = user.ProfilePicture,
         };
 
         return petDto;

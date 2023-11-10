@@ -32,7 +32,7 @@ namespace Tcc_MeAdote_API.Controllers
             _mapper = mapper;
             _userService = userService;
         }
-        
+
         [HttpPost("cadaster")]
         public IActionResult Cadaster([FromBody] CreateUserDto model)
         {
@@ -60,16 +60,24 @@ namespace Tcc_MeAdote_API.Controllers
             {
                 return BadRequest(new { Message = "Erro ao criar o usuário" });
             }
-        }  
+        }
 
         [HttpPost("authenticate")]
         public IActionResult Authentication(UserLoginDto model)
         {
-            var token  = _userService.Authenticate(model);
-            
+            var token = _userService.Authenticate(model);
+
             return Ok(token);
 
         }
+
+        [HttpGet("userpet/{id}")]
+        public IActionResult GetPetUser(int id)
+        {
+            var userData = _userService.GetPetUser(id);
+            return Ok(userData);
+        }
+
 
 
         [HttpGet("{id}")]
