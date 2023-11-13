@@ -19,12 +19,18 @@ class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IPetRepository _petRepository;
     private readonly AppSettings _appSettings;
-    public UserService(IUserLoginRepository userLoginRepository, IOptions<AppSettings> appSettings, IUserRepository userRepository, IPetRepository petRepository)
+    private readonly IHttpContextAccessor _contextAccessor;
+    public UserService(IUserLoginRepository userLoginRepository,
+        IOptions<AppSettings> appSettings,
+        IUserRepository userRepository,
+        IPetRepository petRepository,
+        IHttpContextAccessor contextAccessor)
     {
         _userLoginRepository = userLoginRepository;
         _appSettings = appSettings.Value;
         _userRepository = userRepository;
         _petRepository = petRepository;
+        _contextAccessor = contextAccessor;
     }
     public AuthUserToken Authenticate(UserLoginDto model)
     {
@@ -53,7 +59,7 @@ class UserService : IUserService
         }
     }
 
-    public ReadUserDto GetPetUser(int id)
+    public ReadUserDto GetPetUserById(int id)
     {
         var user = _userRepository.GetById(id);
         var pets = _petRepository.GetPetByIdUser(user.Id);
@@ -79,12 +85,18 @@ class UserService : IUserService
             UserPicture = user.ProfilePicture,
             Email = userEmail.Email,
             PetUsersDto = petList,
-            
-            
         };
 
         return userDto;
 
+    }
+
+
+
+    public int GetUserId()
+    {
+        var user = (User)_contextAccessor.HttpContext.Items["User"];
+        return user.Id;
     }
 
     private string generateJwtToken(User user)

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
+using Tcc_MeAdote_API.Authorization;
 using Tcc_MeAdote_API.Data.Dto;
 using Tcc_MeAdote_API.Entities.User;
 using Tcc_MeAdote_API.Repositories.UserAdressRepositories;
@@ -71,10 +73,11 @@ namespace Tcc_MeAdote_API.Controllers
 
         }
 
+        [Authorize]
         [HttpGet("userpet/{id}")]
         public IActionResult GetPetUser(int id)
         {
-            var userData = _userService.GetPetUser(id);
+            var userData = _userService.GetPetUserById(id);
             return Ok(userData);
         }
 
@@ -86,6 +89,27 @@ namespace Tcc_MeAdote_API.Controllers
             var user = _userRepository.GetById(id);
 
             return Ok(user);
+        }
+
+        [Authorize]
+        [HttpGet("userLogged")]
+        public IActionResult GetUserLogged()
+        {
+            
+
+            var id = _userService.GetUserId();
+            var user = _userService.GetPetUserById(id);
+
+            ReadUserDto readUserDto = new ReadUserDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Telephone = user.Telephone,
+                UserPicture = user.UserPicture,
+            };
+
+            return Ok(readUserDto);
         }
     }
 }

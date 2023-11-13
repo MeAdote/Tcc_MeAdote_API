@@ -5,5 +5,7 @@ using Tcc_MeAdote_API.Data.Dto;
 public interface IUserService
 {
     AuthUserToken Authenticate(UserLoginDto model);
-    ReadUserDto GetPetUser(int id);
+    ReadUserDto GetPetUserById(int id);
+
+    public int GetUserId();
 }

@@ -22,6 +22,8 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSet
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<Context>(opt => opt.UseMySQL(builder.Configuration.GetConnectionString("ConnectionDb")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
